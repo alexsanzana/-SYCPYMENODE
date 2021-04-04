@@ -1,36 +1,51 @@
 const { request, response } = require('express');
+const bcryptjs = require('bcryptjs');
+const Usuario = require('../models/usuario');
 
-const usuariosGet = (req = request, res = response) => {
-
-    const { q, nombre = 'No name', apikey, page = 1, limit } = req.query;
+const usuariosGet = async(req = request, res = response) => {
+    const { limite = 5, desde = 0 } = req.query;
+    const query = { activo: true };
+    /*     const usuarios = await Usuario.find(query)
+            .limit(Number(limite))
+            .skip(Number(desde));
+        const total = await Usuario.countDocuments(query); */
+    // de esta forma puedo encadenar 2 consultas para ejecutarse al mismo tiempo
+    const [total, usuarios] = await Promise.all([
+        Usuario.countDocuments(query), // cuenta el totald e registros o documentos,
+        Usuario.find(query)
+        .limit(Number(limite))
+        .skip(Number(desde))
+    ])
     res.json({
-        msg: 'get Api - controlador',
-        q,
-        nombre,
-        apikey,
-        page,
-        limit
+        total,
+        usuarios
     })
 }
 
-const usuariosPost = (req, res = response) => {
+const usuariosPost = async(req = request, res = response) => {
     // al desestructurar evito que me envien cualquier dato que yo no deseo
-    const { nombre, edad } = req.body;
-
-    res.json({
-        msg: 'Post api - controlador',
-        nombre,
-        edad
-    })
+    const { nombre, correo, password, rol } = req.body;
+    const usuario = new Usuario({ nombre, correo, password, rol });
+    // Encriptar la contraseña
+    const salt = bcryptjs.genSaltSync();
+    usuario.password = bcryptjs.hashSync(password, salt);
+    //Guardar en BD
+    await usuario.save();
+    res.json(usuario);
 }
 
-const usuariosPut = (req, res = response) => {
+const usuariosPut = async(req, res = response) => {
     // obtenemos valor enviados como parametros
     const { id } = req.params;
-    res.json({
-        msg: 'Put api - controlador',
-        id
-    })
+    const { _id, password, correo, ...resto } = req.body;
+    // TODO: validar contra la bd
+    if (password) {
+        // Encriptar la contraseña
+        const salt = bcryptjs.genSaltSync();
+        resto.password = bcryptjs.hashSync(password, salt);
+    }
+    const usuario = await Usuario.findByIdAndUpdate(id, resto);
+    res.json(usuario);
 }
 
 const usuariosPatch = (req, res = response) => {
@@ -40,11 +55,14 @@ const usuariosPatch = (req, res = response) => {
     })
 }
 
-
-const usuariosDelete = (req, res = response) => {
-
+const usuariosDelete = async(req, res = response) => {
+    const { id } = req.params;
+    // Fisicamente lo borramos
+    // const usuario = await Usuario.findByIdAndDelete(id);
+    const usuario = await Usuario.findByIdAndUpdate(id, { activo: false });
     res.json({
-        msg: 'Delete api - controlador'
+        id,
+        usuario
     })
 }
 
