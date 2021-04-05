@@ -2,7 +2,7 @@ const { Router } = require('express');
 const { check } = require('express-validator');
 const { validarCampos, validarJWT, esAdminRole, tieneRole } = require('../middlewares');
 const { esRolValido, emailExiste, existeUsuarioPorId } = require('../helpers/db-validators');
-const { usuariosGet, usuariosPost, usuariosPut, usuariosPatch, usuariosDelete } = require('../controllers/usuarios');
+const { usuariosGet, usuariosPost, usuariosPut, usuariosPatch, usuariosDelete } = require('../controllers');
 
 const router = new Router();
 
