@@ -1,1 +1,11 @@
 node_modules/
+
+.env
+
+uploads/productos/**.*
+uploads/usuarios/**.*
+uploads/ventas/**.*
+uploads/empleados/**.*
+uploads/compras/**.*
+uploads/proveedores/**.*
+uploads/archivos/**.*

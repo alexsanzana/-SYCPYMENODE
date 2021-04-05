@@ -33,7 +33,7 @@ const ProductoSchema = Schema({
     tiempoInstalacion: { type: Number },
     cantidadXUnidad: { type: Number },
     umbral: { type: Number },
-
+    img: { type: String }
 });
 
 // Eliminamos la version y el password
