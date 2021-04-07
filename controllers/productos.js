@@ -2,7 +2,7 @@ const { request, response } = require("express");
 const { Producto } = require("../models");
 
 const obtenerProductos = async(req = request, res = response) => {
-    const { limite = 5, desde = 0 } = req.query;
+    const { limite = 500, desde = 0 } = req.query;
     const query = { activo: true };
     const [total, productos] = await Promise.all([
         Producto.countDocuments(query),

@@ -6,7 +6,8 @@ const subirArchivo = (files, extensionesValidas = ['jpg', 'jpeg', 'png', 'gif'],
     return new Promise((resolve, reject) => {
         const { archivo } = files;
         const nombreCortado = archivo.name.split('.');
-        const extension = nombreCortado[nombreCortado.length - 1];
+        const extension = nombreCortado[nombreCortado.length - 1].toLowerCase();
+
         // validar la extension es necesario obterlo de un archivo de configuracion 
         if (!extensionesValidas.includes(extension)) {
             return reject(`La extension ${extension} no es permitida ${extensionesValidas}`)
