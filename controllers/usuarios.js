@@ -1,6 +1,6 @@
 const { request, response } = require('express');
 const bcryptjs = require('bcryptjs');
-const Usuario = require('../models/usuario');
+const { Usuario, Role } = require('../models');
 
 const usuariosGet = async(req = request, res = response) => {
     const { limite = 100, desde = 0 } = req.query;
@@ -34,7 +34,7 @@ const usuariosPost = async(req = request, res = response) => {
     res.json(usuario);
 }
 
-const usuariosPut = async(req, res = response) => {
+const usuariosPut = async(req = request, res = response) => {
     // obtenemos valor enviados como parametros
     const { id } = req.params;
     const { _id, password, correo, ...resto } = req.body;
@@ -48,17 +48,24 @@ const usuariosPut = async(req, res = response) => {
     res.json(usuario);
 }
 
-const usuariosPatch = (req, res = response) => {
+const usuariosPatch = (req = request, res = response) => {
 
     res.json({
         msg: 'Patch api - controlador'
     })
 }
 
-const usuariosDelete = async(req, res = response) => {
+const usuariosDelete = async(req = request, res = response) => {
     const { id } = req.params;
     const usuario = await Usuario.findByIdAndUpdate(id, { activo: false });
     res.json(usuario);
+}
+
+const rolesGet = async(req = request, res = response) => {
+    const roles = await Role.find();
+    res.json({
+        roles
+    })
 }
 
 module.exports = {
@@ -66,5 +73,6 @@ module.exports = {
     usuariosPost,
     usuariosPut,
     usuariosPatch,
-    usuariosDelete
+    usuariosDelete,
+    rolesGet
 }

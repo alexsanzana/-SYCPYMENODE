@@ -1,4 +1,4 @@
-const { Router, request, response } = require('express');
+const { Router } = require('express');
 const { check } = require('express-validator');
 const { existeCategoriaPorId } = require('../helpers/db-validators');
 const { validarJWT, validarCampos, esAdminRole } = require('../middlewares');

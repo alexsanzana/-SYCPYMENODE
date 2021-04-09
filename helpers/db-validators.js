@@ -1,5 +1,5 @@
 const Role = require('../models/role');
-const { Usuario, Categoria, Producto } = require('../models');
+const { Usuario, Categoria, Producto, Observacione } = require('../models');
 // valida si el rol es valido
 const esRolValido = async(rol = '') => {
     const existeRol = await Role.findOne({ rol });
@@ -40,6 +40,14 @@ const existeProductoPorId = async(id) => {
     }
 }
 
+// Verifica si existe observacion por Id
+const existeObservacionPorId = async(id) => {
+    const existeObservacion = await Observacione.findById(id);
+    if (!existeObservacion) {
+        throw new Error(`El Id no existe ${id}`);
+    }
+}
+
 // Validar colecciones permitidas
 const coleccionesPermitidas = async(coleccion = '', colecciones = []) => {
     const incluida = colecciones.includes(coleccion);
@@ -55,5 +63,6 @@ module.exports = {
     existeUsuarioPorId,
     existeCategoriaPorId,
     existeProductoPorId,
+    existeObservacionPorId,
     coleccionesPermitidas
 }
