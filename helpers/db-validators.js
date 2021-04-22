@@ -1,5 +1,5 @@
 const Role = require('../models/role');
-const { Usuario, Categoria, Producto, Observacione, Codigo, Tipo, RegistrosTipo } = require('../models');
+const { Usuario, Categoria, Producto, Observacione, Codigo, Tipo, RegistrosTipo, Regione, Comuna } = require('../models');
 
 // valida si el rol es valido
 const esRolValido = async(rol = '') => {
@@ -73,6 +73,22 @@ const existeRegistroTipoPorId = async(id) => {
     }
 }
 
+// Verifica si existe Region por Id
+const existeRegionPorId = async(id) => {
+    const existeRegion = await Regione.findById(id);
+    if (!existeRegion) {
+        throw new Error(`El Id no existe ${id}`);
+    }
+}
+
+// Verifica si existe Comuna Region por Id
+const existeComunaPorId = async(id) => {
+    const existeComuna = await Comuna.findById(id);
+    if (!existeComuna) {
+        throw new Error(`El Id no existe ${id}`);
+    }
+}
+
 // Validar colecciones permitidas
 const coleccionesPermitidas = async(coleccion = '', colecciones = []) => {
     const incluida = colecciones.includes(coleccion);
@@ -92,5 +108,7 @@ module.exports = {
     existeObservacionPorId,
     existeCodigoPorId,
     existeTipoPorId,
-    existeRegistroTipoPorId
+    existeRegistroTipoPorId,
+    existeRegionPorId,
+    existeComunaPorId
 }

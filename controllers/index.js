@@ -5,6 +5,9 @@ const producto = require('./productos');
 const usuario = require('./usuarios');
 const observaciones = require('./observaciones');
 const tipos = require('./tipos');
+const registrosTipos = require('./registros-tipos');
+const regiones = require('./regiones');
+const comunas = require('./comunas');
 
 module.exports = {
     ...auth,
@@ -13,5 +16,8 @@ module.exports = {
     ...producto,
     ...usuario,
     ...observaciones,
-    ...tipos
+    ...tipos,
+    ...registrosTipos,
+    ...regiones,
+    ...comunas
 }

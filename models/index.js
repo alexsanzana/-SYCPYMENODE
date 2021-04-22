@@ -7,6 +7,8 @@ const Observacione = require('./observacione');
 const Codigo = require('./codigo');
 const Tipo = require('./tipo');
 const RegistrosTipo = require('./registrosTipo');
+const Regione = require('./regione');
+const Comuna = require('./comuna');
 
 module.exports = {
     Categoria,
@@ -17,5 +19,7 @@ module.exports = {
     Observacione,
     Codigo,
     Tipo,
-    RegistrosTipo
+    RegistrosTipo,
+    Regione,
+    Comuna
 }

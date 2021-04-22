@@ -18,6 +18,8 @@ class Server {
             uploads: '/api/uploads',
             tipos: '/api/tipos',
             registrosTipos: '/api/registrosTipos',
+            regiones: '/api/regiones',
+            comunas: '/api/comunas',
         }
         this.usuariosPath = '/api/usuarios';
         this.authPath = '/api/auth';
@@ -59,6 +61,8 @@ class Server {
         this.app.use(this.paths.uploads, require('../routes/uploads'));
         this.app.use(this.paths.tipos, require('../routes/tipos'));
         this.app.use(this.paths.registrosTipos, require('../routes/registros-tipos'));
+        this.app.use(this.paths.regiones, require('../routes/regiones'));
+        this.app.use(this.paths.comunas, require('../routes/comunas'));
     }
 
     listen() {
