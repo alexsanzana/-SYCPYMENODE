@@ -1,33 +1,33 @@
 const { Router } = require('express');
 const { check } = require('express-validator');
-const { existeObservacionPorId } = require('../helpers/db-validators');
+const { existeCodigoPorId } = require('../helpers/db-validators');
 const { validarJWT, validarCampos, esAdminRole } = require('../middlewares');
-const { obtenerObservaciones, crearObservacion, actualizarObservacion, desactivarActivarObservacion } = require('../controllers/observaciones');
+const { obtenerCodigos, crearCodigo, actualizarCodigo, desactivarActivarCodigo } = require('../controllers/codigos');
 
 const router = new Router();
 
-router.get('/', obtenerObservaciones);
+router.get('/', obtenerCodigos);
 
 router.post('/', [
     validarJWT,
     check('nombre', 'El nombre es obligatorio').not().isEmpty(),
     check('descripcion', 'La descripción es obligatoria').not().isEmpty(),
     validarCampos
-], crearObservacion);
+], crearCodigo);
 
 router.put('/:id', [
     validarJWT,
     check('nombre', 'El nombre es obligatorio').not().isEmpty(),
-    check('id').custom(existeObservacionPorId),
+    check('id').custom(existeCodigoPorId),
     validarCampos
-], actualizarObservacion);
+], actualizarCodigo);
 
 router.delete('/:id', [
     validarJWT,
     esAdminRole,
     check('id', 'No es un Id de Mongo válido').isMongoId(),
-    check('id').custom(existeObservacionPorId),
+    check('id').custom(existeCodigoPorId),
     validarCampos
-], desactivarActivarObservacion);
+], desactivarActivarCodigo);
 
 module.exports = router;

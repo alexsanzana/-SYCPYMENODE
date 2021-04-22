@@ -4,6 +4,7 @@ const categoria = require('./categorias');
 const producto = require('./productos');
 const usuario = require('./usuarios');
 const observaciones = require('./observaciones');
+const tipos = require('./tipos');
 
 module.exports = {
     ...auth,
@@ -11,5 +12,6 @@ module.exports = {
     ...categoria,
     ...producto,
     ...usuario,
-    ...observaciones
+    ...observaciones,
+    ...tipos
 }

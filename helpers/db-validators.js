@@ -1,5 +1,6 @@
 const Role = require('../models/role');
-const { Usuario, Categoria, Producto, Observacione } = require('../models');
+const { Usuario, Categoria, Producto, Observacione, Codigo, Tipo, RegistrosTipo } = require('../models');
+
 // valida si el rol es valido
 const esRolValido = async(rol = '') => {
     const existeRol = await Role.findOne({ rol });
@@ -48,6 +49,30 @@ const existeObservacionPorId = async(id) => {
     }
 }
 
+// Verifica si existe Codigo por Id
+const existeCodigoPorId = async(id) => {
+    const existeCodigo = await Codigo.findById(id);
+    if (!existeCodigo) {
+        throw new Error(`El Id no existe ${id}`);
+    }
+}
+
+// Verifica si existe Tipo por Id
+const existeTipoPorId = async(id) => {
+    const existeTipo = await Tipo.findById(id);
+    if (!existeTipo) {
+        throw new Error(`El Id no existe ${id}`);
+    }
+}
+
+// Verifica si existe Registro Tipo por Id
+const existeRegistroTipoPorId = async(id) => {
+    const existeRegistroTipo = await RegistrosTipo.findById(id);
+    if (!existeRegistroTipo) {
+        throw new Error(`El Id no existe ${id}`);
+    }
+}
+
 // Validar colecciones permitidas
 const coleccionesPermitidas = async(coleccion = '', colecciones = []) => {
     const incluida = colecciones.includes(coleccion);
@@ -60,9 +85,12 @@ const coleccionesPermitidas = async(coleccion = '', colecciones = []) => {
 module.exports = {
     esRolValido,
     emailExiste,
+    coleccionesPermitidas,
     existeUsuarioPorId,
     existeCategoriaPorId,
     existeProductoPorId,
     existeObservacionPorId,
-    coleccionesPermitidas
+    existeCodigoPorId,
+    existeTipoPorId,
+    existeRegistroTipoPorId
 }

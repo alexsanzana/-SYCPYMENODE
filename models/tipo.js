@@ -1,6 +1,6 @@
 const { Schema, model } = require('mongoose');
 
-const ObservacionSchema = Schema({
+const TipoSchema = Schema({
     nombre: {
         type: String,
         required: [true, 'El nombre es obligatorio'],
@@ -22,9 +22,9 @@ const ObservacionSchema = Schema({
 });
 
 // Eliminamos la version 
-ObservacionSchema.methods.toJSON = function() {
+TipoSchema.methods.toJSON = function() {
     const { __v, ...data } = this.toObject();
     return data;
 }
 
-module.exports = model('Observacione', ObservacionSchema);
+module.exports = model('Tipo', TipoSchema);

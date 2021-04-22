@@ -4,6 +4,9 @@ const Role = require('./role');
 const Server = require('./server');
 const Usuario = require('./usuario');
 const Observacione = require('./observacione');
+const Codigo = require('./codigo');
+const Tipo = require('./tipo');
+const RegistrosTipo = require('./registrosTipo');
 
 module.exports = {
     Categoria,
@@ -11,5 +14,8 @@ module.exports = {
     Role,
     Server,
     Usuario,
-    Observacione
+    Observacione,
+    Codigo,
+    Tipo,
+    RegistrosTipo
 }

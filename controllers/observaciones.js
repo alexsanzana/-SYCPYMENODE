@@ -2,23 +2,22 @@ const { request, response } = require("express");
 const { Observacione } = require("../models");
 
 const obtenerObservaciones = async(req = request, res = response) => {
-    const { limite = 5, desde = 0 } = req.query;
-    const query = { activo: true };
-    const [total, observaciones] = await Promise.all([
-        Observacione.countDocuments(query),
-        Observacione.find(query)
+    const { limite = 500, desde = 0 } = req.query;
+    const [total, respuesta] = await Promise.all([
+        Observacione.countDocuments(),
+        Observacione.find()
         .populate('usuario', 'nombre')
         .limit(Number(limite))
         .skip(Number(desde))
     ]);
     res.json({
         total,
-        observaciones
+        respuesta
     });
 }
 
 const crearObservacion = async(req = request, res = response) => {
-    const nombre = req.body.nombre.toUpperCase();
+    const { nombre } = req.body.nombre.toUpperCase();
     const observacionDB = await Observacione.findOne({ nombre });
     if (observacionDB) {
         return res.status(400).json({
@@ -27,10 +26,12 @@ const crearObservacion = async(req = request, res = response) => {
     }
     // generar la data a guardar
     const data = {
-        nombre,
+        nombre: req.body.nombre.toUpperCase(),
+        descripcion: req.body.descripcion,
         usuario: req.usuario._id
     }
     const observacion = await new Observacione(data);
+    console.log('object ' + observacion);
     //Guardar DB seria bueno tener esto dentro de un trycatch
     await observacion.save();
     res.status(201).json(observacion);
@@ -41,21 +42,29 @@ const actualizarObservacion = async(req = request, res = response) => {
     // eliminamos activo y usuario por si son enviados desde el frontEnd
     const { activo, usuario, ...data } = req.body;
     data.nombre = data.nombre.toUpperCase();
+    data.descripcion = data.descripcion
     data.usuario = req.usuario._id;
     const observacion = await Observacione.findByIdAndUpdate(id, data, { new: true });
     res.json(observacion);
 }
 
-// Desactivar observacion activo:false
-const desactivarObservacion = async(req = request, res = response) => {
+
+// Desactivar o activa segun corresponda
+const desactivarActivarObservacion = async(req = request, res = response) => {
     const { id } = req.params;
-    const observacionDesactivada = await Observacione.findByIdAndUpdate(id, { activo: false }, { new: true });
-    res.json(observacionDesactivada);
+    const observacionDB = await Observacione.findById(id);
+    if (observacionDB.activo) {
+        const observacionDesactivada = await Observacione.findByIdAndUpdate(id, { activo: false }, { new: true });
+        res.json(observacionDesactivada);
+    } else {
+        const observacionDesactivada = await Observacione.findByIdAndUpdate(id, { activo: true }, { new: true });
+        res.json(observacionDesactivada);
+    }
 }
 
 module.exports = {
     obtenerObservaciones,
     crearObservacion,
     actualizarObservacion,
-    desactivarObservacion
+    desactivarActivarObservacion
 }

@@ -1,33 +1,33 @@
 const { Router } = require('express');
 const { check } = require('express-validator');
-const { existeObservacionPorId } = require('../helpers/db-validators');
+const { existeTipoPorId } = require('../helpers/db-validators');
 const { validarJWT, validarCampos, esAdminRole } = require('../middlewares');
-const { obtenerObservaciones, crearObservacion, actualizarObservacion, desactivarActivarObservacion } = require('../controllers/observaciones');
+const { obtenerTipos, crearTipo, actualizarTipo, desactivarActivarTipo } = require('../controllers/tipos.js');
 
 const router = new Router();
 
-router.get('/', obtenerObservaciones);
+router.get('/', obtenerTipos);
 
 router.post('/', [
     validarJWT,
     check('nombre', 'El nombre es obligatorio').not().isEmpty(),
     check('descripcion', 'La descripción es obligatoria').not().isEmpty(),
     validarCampos
-], crearObservacion);
+], crearTipo);
 
 router.put('/:id', [
     validarJWT,
     check('nombre', 'El nombre es obligatorio').not().isEmpty(),
-    check('id').custom(existeObservacionPorId),
+    check('id').custom(existeTipoPorId),
     validarCampos
-], actualizarObservacion);
+], actualizarTipo);
 
 router.delete('/:id', [
     validarJWT,
     esAdminRole,
     check('id', 'No es un Id de Mongo válido').isMongoId(),
-    check('id').custom(existeObservacionPorId),
+    check('id').custom(existeTipoPorId),
     validarCampos
-], desactivarActivarObservacion);
+], desactivarActivarTipo);
 
 module.exports = router;

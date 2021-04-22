@@ -1,14 +1,14 @@
 const { Schema, model } = require('mongoose');
 
-const ObservacionSchema = Schema({
+const RegistrosTipoSchema = Schema({
     nombre: {
         type: String,
         required: [true, 'El nombre es obligatorio'],
-        unique: true
     },
-    descripcion: {
-        type: String,
-        required: [true, 'La descripción es obligatoria'],
+    tipo: {
+        type: Schema.Types.ObjectId,
+        ref: 'Tipo',
+        required: true
     },
     activo: {
         type: Boolean,
@@ -22,9 +22,9 @@ const ObservacionSchema = Schema({
 });
 
 // Eliminamos la version 
-ObservacionSchema.methods.toJSON = function() {
+RegistrosTipoSchema.methods.toJSON = function() {
     const { __v, ...data } = this.toObject();
     return data;
 }
 
-module.exports = model('Observacione', ObservacionSchema);
+module.exports = model('RegistrosTipo', RegistrosTipoSchema);
