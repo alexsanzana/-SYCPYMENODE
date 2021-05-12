@@ -9,6 +9,9 @@ const Tipo = require('./tipo');
 const RegistrosTipo = require('./registrosTipo');
 const Regione = require('./regione');
 const Comuna = require('./comuna');
+const Proveedore = require('./proveedore');
+const Empleado = require('./empleado');
+const Cliente = require('./cliente');
 
 module.exports = {
     Categoria,
@@ -21,5 +24,8 @@ module.exports = {
     Tipo,
     RegistrosTipo,
     Regione,
-    Comuna
+    Comuna,
+    Proveedore,
+    Empleado,
+    Cliente
 }

@@ -8,6 +8,9 @@ const tipos = require('./tipos');
 const registrosTipos = require('./registros-tipos');
 const regiones = require('./regiones');
 const comunas = require('./comunas');
+const proveedores = require('./proveedores');
+const empleados = require('./empleados');
+const clientes = require('./clientes');
 
 module.exports = {
     ...auth,
@@ -19,5 +22,8 @@ module.exports = {
     ...tipos,
     ...registrosTipos,
     ...regiones,
-    ...comunas
+    ...comunas,
+    ...proveedores,
+    ...empleados,
+    ...clientes
 }

@@ -1,5 +1,5 @@
 const { request, response } = require("express");
-const { RegistrosTipo } = require("../models");
+const { RegistrosTipo, Tipo } = require("../models");
 
 const obtenerRegistrosTipos = async(req = request, res = response) => {
     const { limite = 500, desde = 0 } = req.query;
@@ -15,6 +15,19 @@ const obtenerRegistrosTipos = async(req = request, res = response) => {
         total,
         respuesta
     });
+}
+
+const obtenerRegistrosPorTipo = async(req = request, res = response) => {
+    const { id } = req.params;
+    try {
+        const registrosPorTipo = await RegistrosTipo.find({ tipo: id });
+        res.json(registrosPorTipo);
+
+
+
+    } catch (error) {
+        res.status(400).json({ error });
+    }
 }
 
 const crearRegistroTipo = async(req = request, res = response) => {
@@ -76,6 +89,7 @@ const desactivarActivarRegistroTipo = async(req = request, res = response) => {
 
 module.exports = {
     obtenerRegistrosTipos,
+    obtenerRegistrosPorTipo,
     crearRegistroTipo,
     actualizarRegistroTipo,
     desactivarActivarRegistroTipo

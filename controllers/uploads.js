@@ -6,7 +6,7 @@ cloudinary.config(process.env.CLOUDINARY_URL);
 
 const { request, response } = require("express");
 const { subirArchivo } = require('../helpers');
-const { Usuario, Producto } = require('../models');
+const { Usuario, Producto, Proveedore, Empleado, Cliente } = require('../models'); //asanzana
 
 const cargarArchivo = async(req = request, res = response) => {
 
@@ -44,7 +44,30 @@ const actualizarImagen = async(req = request, res = response) => {
                     });
                 }
                 break;
-
+            case 'proveedores':
+                modelo = await Proveedore.findById(id);
+                if (!modelo) {
+                    return res.status(400).json({
+                        msg: `No existe un proveedor con el Id ${id}`
+                    });
+                }
+                break;
+            case 'empleados':
+                modelo = await Empleado.findById(id);
+                if (!modelo) {
+                    return res.status(400).json({
+                        msg: `No existe un empleado con el Id ${id}`
+                    });
+                }
+                break;
+            case 'clientes':
+                modelo = await Cliente.findById(id);
+                if (!modelo) {
+                    return res.status(400).json({
+                        msg: `No existe un cliente con el Id ${id}`
+                    });
+                }
+                break;
             default:
                 return res.status(500).json({ msg: 'Se me olvido Validar esto' });
         }
@@ -92,7 +115,30 @@ const actualizarImagenCloudinary = async(req = request, res = response) => {
                 });
             }
             break;
-
+        case 'proveedores':
+            modelo = await Proveedore.findById(id);
+            if (!modelo) {
+                return res.status(400).json({
+                    msg: `No existe un proveedor con el Id ${id}`
+                });
+            }
+            break;
+        case 'empleados':
+            modelo = await Empleado.findById(id);
+            if (!modelo) {
+                return res.status(400).json({
+                    msg: `No existe un empleado con el Id ${id}`
+                });
+            }
+            break;
+        case 'clientes':
+            modelo = await Cliente.findById(id);
+            if (!modelo) {
+                return res.status(400).json({
+                    msg: `No existe un cliente con el Id ${id}`
+                });
+            }
+            break;
         default:
             return res.status(500).json({ msg: 'Se me olvido Validar esto' });
     }
@@ -108,6 +154,7 @@ const actualizarImagenCloudinary = async(req = request, res = response) => {
         const { tempFilePath } = req.files.archivo
         const { secure_url } = await cloudinary.uploader.upload(tempFilePath);
         modelo.img = secure_url;
+
         await modelo.save();
         res.json(modelo);
 
@@ -133,6 +180,32 @@ const mostrarImagen = async(req = request, res = response) => {
             if (!modelo) {
                 return res.status(400).json({
                     msg: `No existe un producto con el Id ${id}`
+                });
+            }
+            break;
+
+        case 'proveedores':
+            modelo = await Proveedore.findById(id);
+            if (!modelo) {
+                return res.status(400).json({
+                    msg: `No existe un proveedor con el Id ${id}`
+                });
+            }
+            break;
+
+        case 'empleados':
+            modelo = await Empleado.findById(id);
+            if (!modelo) {
+                return res.status(400).json({
+                    msg: `No existe un empleado con el Id ${id}`
+                });
+            }
+            break;
+        case 'clientes':
+            modelo = await Cliente.findById(id);
+            if (!modelo) {
+                return res.status(400).json({
+                    msg: `No existe un cliente con el Id ${id}`
                 });
             }
             break;

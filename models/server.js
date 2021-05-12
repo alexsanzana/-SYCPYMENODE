@@ -20,6 +20,9 @@ class Server {
             registrosTipos: '/api/registrosTipos',
             regiones: '/api/regiones',
             comunas: '/api/comunas',
+            proveedores: '/api/proveedores',
+            empleados: '/api/empleados',
+            clientes: '/api/clientes',
         }
         this.usuariosPath = '/api/usuarios';
         this.authPath = '/api/auth';
@@ -63,11 +66,14 @@ class Server {
         this.app.use(this.paths.registrosTipos, require('../routes/registros-tipos'));
         this.app.use(this.paths.regiones, require('../routes/regiones'));
         this.app.use(this.paths.comunas, require('../routes/comunas'));
+        this.app.use(this.paths.proveedores, require('../routes/proveedores'));
+        this.app.use(this.paths.empleados, require('../routes/empleados'));
+        this.app.use(this.paths.clientes, require('../routes/clientes'));
     }
 
     listen() {
         this.app.listen(this.port, () => {
-            console.log('Servidor Corriendo en Purto ', this.port);
+            console.log('Servidor Corriendo en Puerto ', this.port);
         });
     }
 

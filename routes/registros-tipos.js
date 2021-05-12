@@ -1,12 +1,18 @@
 const { Router } = require('express');
 const { check } = require('express-validator');
-const { existeRegistroTipoPorId } = require('../helpers/db-validators');
+const { existeRegistroTipoPorId, existeTipoPorId } = require('../helpers/db-validators');
 const { validarJWT, validarCampos, esAdminRole } = require('../middlewares');
-const { obtenerRegistrosTipos, crearRegistroTipo, actualizarRegistroTipo, desactivarActivarRegistroTipo } = require('../controllers/registros-tipos.js');
+const { obtenerRegistrosTipos, obtenerRegistrosPorTipo, crearRegistroTipo, actualizarRegistroTipo, desactivarActivarRegistroTipo } = require('../controllers/registros-tipos.js');
 
 const router = new Router();
 
 router.get('/', obtenerRegistrosTipos);
+
+router.get('/:id', [
+    check('id', 'No es un Id de Mongo válido').isMongoId(),
+    check('id').custom(existeTipoPorId),
+    validarCampos,
+], obtenerRegistrosPorTipo);
 
 router.post('/', [
     validarJWT,
