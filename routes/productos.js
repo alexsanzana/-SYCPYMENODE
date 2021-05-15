@@ -7,7 +7,7 @@ const {
     obtenerProductos,
     obtenerProducto,
     actualizarProducto,
-    desactivarProducto
+    desactivarActivarProducto
 } = require('../controllers');
 
 const router = new Router();
@@ -42,6 +42,6 @@ router.delete('/:id', [
     check('id', 'No es un Id de Mongo válido').isMongoId(),
     check('id').custom(existeProductoPorId),
     validarCampos
-], desactivarProducto);
+], desactivarActivarProducto);
 
 module.exports = router;

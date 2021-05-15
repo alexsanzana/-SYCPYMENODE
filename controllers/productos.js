@@ -3,18 +3,18 @@ const { Producto } = require("../models");
 
 const obtenerProductos = async(req = request, res = response) => {
     const { limite = 500, desde = 0 } = req.query;
-    const query = { activo: true };
-    const [total, productos] = await Promise.all([
-        Producto.countDocuments(query),
-        Producto.find(query)
+    /*     const query = { activo: true }; */
+    const [total, respuesta] = await Promise.all([
+        Producto.countDocuments(), //query
+        Producto.find() // query
         .populate('usuario', 'nombre')
-        .populate('categoria', 'nombre')
+        /*         .populate('categoria', 'nombre') */
         .limit(Number(limite))
         .skip(Number(desde))
     ]);
     res.json({
         total,
-        productos
+        respuesta
     });
 }
 
@@ -22,7 +22,7 @@ const obtenerProducto = async(req = request, res = response) => {
     const { id } = req.params;
     const producto = await Producto.findById(id)
         .populate('usuario', 'nombre')
-        .populate('categoria', 'nombre');
+        /*         .populate('categoria', 'nombre'); */
     res.json(producto);
 }
 
@@ -58,10 +58,17 @@ const actualizarProducto = async(req = request, res = response) => {
     res.json(producto);
 }
 
-const desactivarProducto = async(req = request, res = response) => {
+const desactivarActivarProducto = async(req = request, res = response) => {
+
     const { id } = req.params;
-    const productoDesactivado = await Producto.findByIdAndUpdate(id, { activo: false }, { new: true });
-    res.json(productoDesactivado);
+    const productoDB = await Producto.findById(id);
+    if (productoDB.activo) {
+        const productoDesactivado = await Producto.findByIdAndUpdate(id, { activo: false }, { new: true });
+        res.json(productoDesactivado);
+    } else {
+        const productoActivado = await Producto.findByIdAndUpdate(id, { activo: true }, { new: true });
+        res.json(productoActivado);
+    }
 }
 
 module.exports = {
@@ -69,5 +76,5 @@ module.exports = {
     obtenerProductos,
     obtenerProducto,
     actualizarProducto,
-    desactivarProducto
+    desactivarActivarProducto
 }

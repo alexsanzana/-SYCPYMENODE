@@ -23,6 +23,7 @@ class Server {
             proveedores: '/api/proveedores',
             empleados: '/api/empleados',
             clientes: '/api/clientes',
+            pagos: '/api/pagos',
         }
         this.usuariosPath = '/api/usuarios';
         this.authPath = '/api/auth';
@@ -69,6 +70,7 @@ class Server {
         this.app.use(this.paths.proveedores, require('../routes/proveedores'));
         this.app.use(this.paths.empleados, require('../routes/empleados'));
         this.app.use(this.paths.clientes, require('../routes/clientes'));
+        this.app.use(this.paths.pagos, require('../routes/pagos'));
     }
 
     listen() {

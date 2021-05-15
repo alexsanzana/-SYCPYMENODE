@@ -38,7 +38,7 @@ const ProductoSchema = Schema({
 
 // Eliminamos la version y el password
 ProductoSchema.methods.toJSON = function() {
-    const { __v, activo, ...data } = this.toObject();
+    const { __v, ...data } = this.toObject();
     return data;
 }
 

@@ -11,6 +11,7 @@ const comunas = require('./comunas');
 const proveedores = require('./proveedores');
 const empleados = require('./empleados');
 const clientes = require('./clientes');
+const pagos = require('./pagos');
 
 module.exports = {
     ...auth,
@@ -25,5 +26,6 @@ module.exports = {
     ...comunas,
     ...proveedores,
     ...empleados,
-    ...clientes
+    ...clientes,
+    ...pagos
 }

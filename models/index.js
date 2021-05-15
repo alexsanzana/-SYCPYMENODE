@@ -12,6 +12,7 @@ const Comuna = require('./comuna');
 const Proveedore = require('./proveedore');
 const Empleado = require('./empleado');
 const Cliente = require('./cliente');
+const Pago = require('./pago');
 
 module.exports = {
     Categoria,
@@ -27,5 +28,6 @@ module.exports = {
     Comuna,
     Proveedore,
     Empleado,
-    Cliente
+    Cliente,
+    Pago
 }
