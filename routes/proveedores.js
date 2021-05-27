@@ -2,11 +2,17 @@ const { Router } = require('express');
 const { check } = require('express-validator');
 const { validarCampos, validarJWT, esAdminRole } = require('../middlewares');
 const { existeProveedorPorId } = require('../helpers/db-validators');
-const { obtenerProveedores, crearProveedor, actualizarProveedor, desactivarActivarProveedor } = require('../controllers');
+const { obtenerProveedores, obtenerProveedor, crearProveedor, actualizarProveedor, desactivarActivarProveedor } = require('../controllers');
 
 const router = new Router();
 
 router.get('/', obtenerProveedores);
+
+router.get('/:id', [
+    check('id', 'No es un Id de Mongo válido').isMongoId(),
+    check('id').custom(existeProveedorPorId),
+    validarCampos,
+], obtenerProveedor);
 
 router.post('/', [
     validarJWT,

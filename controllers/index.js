@@ -12,6 +12,7 @@ const proveedores = require('./proveedores');
 const empleados = require('./empleados');
 const clientes = require('./clientes');
 const pagos = require('./pagos');
+const imagenesProductos = require('./imagenes-productos');
 
 module.exports = {
     ...auth,
@@ -27,5 +28,6 @@ module.exports = {
     ...proveedores,
     ...empleados,
     ...clientes,
-    ...pagos
+    ...pagos,
+    ...imagenesProductos
 }

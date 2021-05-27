@@ -24,6 +24,7 @@ class Server {
             empleados: '/api/empleados',
             clientes: '/api/clientes',
             pagos: '/api/pagos',
+            imagenesProductos: '/api/imagenesProductos',
         }
         this.usuariosPath = '/api/usuarios';
         this.authPath = '/api/auth';
@@ -71,6 +72,7 @@ class Server {
         this.app.use(this.paths.empleados, require('../routes/empleados'));
         this.app.use(this.paths.clientes, require('../routes/clientes'));
         this.app.use(this.paths.pagos, require('../routes/pagos'));
+        this.app.use(this.paths.imagenesProductos, require('../routes/imagenes-productos'));
     }
 
     listen() {

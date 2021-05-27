@@ -11,14 +11,14 @@ router.post('/', validarArchivoSubir, cargarArchivo);
 router.put('/:coleccion/:id', [
     validarArchivoSubir,
     check('id', 'El Id debe ser de Mongo').isMongoId(),
-    check('coleccion').custom(c => coleccionesPermitidas(c, ['usuarios', 'clientes', 'productos', 'empleados', 'pagos', 'ventas', 'compras', 'proveedores', 'archivos'])),
+    check('coleccion').custom(c => coleccionesPermitidas(c, ['usuarios', 'clientes', 'productos', 'imagenesProductos', 'empleados', 'pagos', 'ventas', 'compras', 'proveedores', 'archivos'])),
     validarCampos
 ], actualizarImagenCloudinary);
 //], actualizarImagen);
 
 router.get('/:coleccion/:id', [
     check('id', 'El Id debe ser de Mongo').isMongoId(),
-    check('coleccion').custom(c => coleccionesPermitidas(c, ['usuarios', 'clientes', 'productos', 'empleados', 'pagos', 'ventas', 'compras', 'proveedores', 'archivos'])),
+    check('coleccion').custom(c => coleccionesPermitidas(c, ['usuarios', 'clientes', 'productos', 'imagenesProductos', 'empleados', 'pagos', 'ventas', 'compras', 'proveedores', 'archivos'])),
     validarCampos
 ], mostrarImagen);
 

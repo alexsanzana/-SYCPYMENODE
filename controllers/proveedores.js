@@ -16,6 +16,13 @@ const obtenerProveedores = async(req = request, res = response) => {
     });
 }
 
+const obtenerProveedor = async(req = request, res = response) => {
+    const { id } = req.params;
+    const proveedor = await Proveedore.findById(id)
+        .populate('usuario', 'nombre')
+    res.json(proveedor);
+}
+
 const crearProveedor = async(req = request, res = response) => {
     try {
         const proveedorDB = await Proveedore.findOne({ nombre: req.body.nombre.toUpperCase() })
@@ -88,6 +95,7 @@ const desactivarActivarProveedor = async(req = request, res = response) => {
 
 module.exports = {
     obtenerProveedores,
+    obtenerProveedor,
     crearProveedor,
     actualizarProveedor,
     desactivarActivarProveedor

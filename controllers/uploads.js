@@ -6,7 +6,7 @@ cloudinary.config(process.env.CLOUDINARY_URL);
 
 const { request, response } = require("express");
 const { subirArchivo } = require('../helpers');
-const { Usuario, Producto, Proveedore, Empleado, Cliente, Pago } = require('../models'); //asanzana
+const { Usuario, Producto, Proveedore, Empleado, Cliente, Pago, ImagenesProducto } = require('../models'); //asanzana
 
 const cargarArchivo = async(req = request, res = response) => {
 
@@ -73,6 +73,14 @@ const actualizarImagen = async(req = request, res = response) => {
                 if (!modelo) {
                     return res.status(400).json({
                         msg: `No existe un pago con el Id ${id}`
+                    });
+                }
+                break;
+            case 'imagenesProductos':
+                modelo = await ImagenesProducto.findById(id);
+                if (!modelo) {
+                    return res.status(400).json({
+                        msg: `No existe un imagen Producto con el Id ${id}`
                     });
                 }
                 break;
@@ -155,6 +163,14 @@ const actualizarImagenCloudinary = async(req = request, res = response) => {
                 });
             }
             break;
+        case 'imagenesProductos':
+            modelo = await ImagenesProducto.findById(id);
+            if (!modelo) {
+                return res.status(400).json({
+                    msg: `No existe un imagen Producto con el Id ${id}`
+                });
+            }
+            break;
         default:
             return res.status(500).json({ msg: 'Se me olvido Validar esto' });
     }
@@ -228,6 +244,14 @@ const mostrarImagen = async(req = request, res = response) => {
             if (!modelo) {
                 return res.status(400).json({
                     msg: `No existe un pago con el Id ${id}`
+                });
+            }
+            break;
+        case 'imagenesProductos':
+            modelo = await ImagenesProducto.findById(id);
+            if (!modelo) {
+                return res.status(400).json({
+                    msg: `No existe un imagen Producto con el Id ${id}`
                 });
             }
             break;

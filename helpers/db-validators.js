@@ -1,5 +1,5 @@
 const Role = require('../models/role');
-const { Usuario, Categoria, Producto, Observacione, Codigo, Tipo, RegistrosTipo, Regione, Comuna, Proveedore, Empleado, Cliente, Pago } = require('../models');
+const { Usuario, Categoria, Producto, Observacione, Codigo, Tipo, RegistrosTipo, Regione, Comuna, Proveedore, Empleado, Cliente, Pago, ImagenesProducto } = require('../models');
 
 // valida si el rol es valido
 const esRolValido = async(rol = '') => {
@@ -121,6 +121,14 @@ const existePagoPorId = async(id) => {
     }
 }
 
+// Verifica si existe Pago por Id
+const existeImagenProductoPorId = async(id) => {
+    const existeImagenProducto = await ImagenesProducto.findById(id);
+    if (!existeImagenProducto) {
+        throw new Error(`El Id no existe ${id}`);
+    }
+}
+
 // Validar colecciones permitidas
 const coleccionesPermitidas = async(coleccion = '', colecciones = []) => {
     const incluida = colecciones.includes(coleccion);
@@ -146,5 +154,6 @@ module.exports = {
     existeProveedorPorId,
     existeEmpleadoPorId,
     existeClientePorId,
-    existePagoPorId
+    existePagoPorId,
+    existeImagenProductoPorId
 }
