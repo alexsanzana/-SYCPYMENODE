@@ -82,7 +82,7 @@ class Server {
     }
 
     listen() {
-        this.app.listen(this.port, () => {
+        this.app.listen((this.port || 8080), () => {
             console.log('Servidor Corriendo en Puerto ', this.port);
         });
     }
