@@ -14,6 +14,9 @@ const Empleado = require('./empleado');
 const Cliente = require('./cliente');
 const Pago = require('./pago');
 const ImagenesProducto = require('./imagenesProducto');
+const Cotizacione = require('./cotizacione');
+const Venta = require('./venta');
+const Compra = require('./compra');
 
 module.exports = {
     Categoria,
@@ -31,5 +34,8 @@ module.exports = {
     Empleado,
     Cliente,
     Pago,
-    ImagenesProducto
+    ImagenesProducto,
+    Cotizacione,
+    Venta,
+    Compra
 }

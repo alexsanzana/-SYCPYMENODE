@@ -25,6 +25,9 @@ class Server {
             clientes: '/api/clientes',
             pagos: '/api/pagos',
             imagenesProductos: '/api/imagenesProductos',
+            cotizaciones: '/api/cotizaciones',
+            ventas: '/api/ventas',
+            compras: '/api/compras',
         }
         this.usuariosPath = '/api/usuarios';
         this.authPath = '/api/auth';
@@ -73,6 +76,9 @@ class Server {
         this.app.use(this.paths.clientes, require('../routes/clientes'));
         this.app.use(this.paths.pagos, require('../routes/pagos'));
         this.app.use(this.paths.imagenesProductos, require('../routes/imagenes-productos'));
+        this.app.use(this.paths.cotizaciones, require('../routes/cotizaciones'));
+        this.app.use(this.paths.ventas, require('../routes/ventas'));
+        this.app.use(this.paths.compras, require('../routes/compras'));
     }
 
     listen() {

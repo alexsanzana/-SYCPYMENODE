@@ -13,6 +13,9 @@ const empleados = require('./empleados');
 const clientes = require('./clientes');
 const pagos = require('./pagos');
 const imagenesProductos = require('./imagenes-productos');
+const cotizaciones = require('./cotizaciones');
+const ventas = require('./ventas');
+const compras = require('./compras');
 
 module.exports = {
     ...auth,
@@ -29,5 +32,9 @@ module.exports = {
     ...empleados,
     ...clientes,
     ...pagos,
-    ...imagenesProductos
+    ...imagenesProductos,
+    ...cotizaciones,
+    ...ventas,
+    ...compras
+
 }

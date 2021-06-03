@@ -1,5 +1,5 @@
 const Role = require('../models/role');
-const { Usuario, Categoria, Producto, Observacione, Codigo, Tipo, RegistrosTipo, Regione, Comuna, Proveedore, Empleado, Cliente, Pago, ImagenesProducto } = require('../models');
+const { Usuario, Categoria, Producto, Observacione, Codigo, Tipo, RegistrosTipo, Regione, Comuna, Proveedore, Empleado, Cliente, Pago, ImagenesProducto, Cotizacione, Venta, Compra } = require('../models');
 
 // valida si el rol es valido
 const esRolValido = async(rol = '') => {
@@ -121,10 +121,34 @@ const existePagoPorId = async(id) => {
     }
 }
 
-// Verifica si existe Pago por Id
+// Verifica si existe Imagen producto por Id
 const existeImagenProductoPorId = async(id) => {
     const existeImagenProducto = await ImagenesProducto.findById(id);
     if (!existeImagenProducto) {
+        throw new Error(`El Id no existe ${id}`);
+    }
+}
+
+// Verifica si existe Cotizacion por Id
+const existeCotizacionPorId = async(id) => {
+    const existeCotizacion = await Cotizacione.findById(id);
+    if (!existeCotizacion) {
+        throw new Error(`El Id no existe ${id}`);
+    }
+}
+
+// Verifica si existe Venta por Id
+const existeVentaPorId = async(id) => {
+    const existeVenta = await Venta.findById(id);
+    if (!existeVenta) {
+        throw new Error(`El Id no existe ${id}`);
+    }
+}
+
+// Verifica si existe Compra por Id
+const existeCompraPorId = async(id) => {
+    const existeCompra = await Compra.findById(id);
+    if (!existeCompra) {
         throw new Error(`El Id no existe ${id}`);
     }
 }
@@ -155,5 +179,8 @@ module.exports = {
     existeEmpleadoPorId,
     existeClientePorId,
     existePagoPorId,
-    existeImagenProductoPorId
+    existeImagenProductoPorId,
+    existeCotizacionPorId,
+    existeVentaPorId,
+    existeCompraPorId
 }
