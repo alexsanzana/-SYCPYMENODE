@@ -2,7 +2,7 @@ const { Router } = require('express');
 const { check } = require('express-validator');
 const { existeObservacionPorId } = require('../helpers/db-validators');
 const { validarJWT, validarCampos, esAdminRole } = require('../middlewares');
-const { obtenerObservaciones, crearObservacion, actualizarObservacion, desactivarActivarObservacion } = require('../controllers/observaciones');
+const { obtenerObservaciones, crearObservacion, actualizarObservacion, desactivarActivarObservacion } = require('../controllers');
 
 const router = new Router();
 
