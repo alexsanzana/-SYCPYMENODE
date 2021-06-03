@@ -3,7 +3,7 @@ const Producto = require('./producto');
 const Role = require('./role');
 const Server = require('./server');
 const Usuario = require('./usuario');
-const Observacione = require('./observacione');
+const Observaciones = require('./observaciones');
 const Codigo = require('./codigo');
 const Tipo = require('./tipo');
 const RegistrosTipo = require('./registrosTipo');
@@ -24,7 +24,7 @@ module.exports = {
     Role,
     Server,
     Usuario,
-    Observacione,
+    Observaciones,
     Codigo,
     Tipo,
     RegistrosTipo,

@@ -4,18 +4,18 @@ const categoria = require('./categorias');
 const producto = require('./productos');
 const usuario = require('./usuarios');
 const observacione = require('./observaciones');
-const tipos = require('./tipos');
-const registrosTipos = require('./registros-tipos');
-const regiones = require('./regiones');
-const comunas = require('./comunas');
-const proveedores = require('./proveedores');
-const empleados = require('./empleados');
-const clientes = require('./clientes');
-const pagos = require('./pagos');
-const imagenesProductos = require('./imagenes-productos');
-const cotizaciones = require('./cotizaciones');
-const ventas = require('./ventas');
-const compras = require('./compras');
+const tipo = require('./tipos');
+const registrosTipo = require('./registros-tipos');
+const regione = require('./regiones');
+const comuna = require('./comunas');
+const proveedore = require('./proveedores');
+const empleado = require('./empleados');
+const cliente = require('./clientes');
+const pago = require('./pagos');
+const imagenesProducto = require('./imagenes-productos');
+const cotizacione = require('./cotizaciones');
+const venta = require('./ventas');
+const compra = require('./compras');
 
 module.exports = {
     ...auth,
@@ -24,17 +24,17 @@ module.exports = {
     ...producto,
     ...usuario,
     ...observacione,
-    ...tipos,
-    ...registrosTipos,
-    ...regiones,
-    ...comunas,
-    ...proveedores,
-    ...empleados,
-    ...clientes,
-    ...pagos,
-    ...imagenesProductos,
-    ...cotizaciones,
-    ...ventas,
-    ...compras
+    ...tipo,
+    ...registrosTipo,
+    ...regione,
+    ...comuna,
+    ...proveedore,
+    ...empleado,
+    ...cliente,
+    ...pago,
+    ...imagenesProducto,
+    ...cotizacione,
+    ...venta,
+    ...compra
 
 }
