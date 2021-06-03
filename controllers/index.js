@@ -3,7 +3,7 @@ const buscar = require('./buscar');
 const categoria = require('./categorias');
 const producto = require('./productos');
 const usuario = require('./usuarios');
-const observacione = require('./observaciones');
+/* const observacione = require('./observaciones'); */
 const tipo = require('./tipos');
 const registrosTipo = require('./registros-tipos');
 const regione = require('./regiones');
@@ -23,7 +23,7 @@ module.exports = {
     ...categoria,
     ...producto,
     ...usuario,
-    ...observacione,
+    /*     ...observacione, */
     ...tipo,
     ...registrosTipo,
     ...regione,
