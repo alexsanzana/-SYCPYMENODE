@@ -3,7 +3,7 @@ const { Schema, model } = require('mongoose');
 const ObservacionSchema = Schema({
     nombre: {
         type: String,
-        required: [true, 'El nombre de la obserbacion es obligatorio'],
+        required: [true, 'El nombre es obligatorio'],
         unique: true
     },
     descripcion: {

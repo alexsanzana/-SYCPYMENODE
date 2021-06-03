@@ -3,7 +3,7 @@ const { Schema, model } = require('mongoose');
 const CotizacionSchema = Schema({
     numeroCotizacion: {
         type: String,
-        required: [true, 'El numer Cotización es obligatorio'],
+        required: [true, 'El numero Cotización es obligatorio'],
         unique: true
     },
     idCliente: {
