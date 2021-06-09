@@ -35,7 +35,15 @@ const ProductoSchema = Schema({
     tiempoInstalacion: { type: Number },
     cantidadXUnidad: { type: Number },
     umbral: { type: Number },
-    img: { type: String }
+    img: { type: String },
+    entrada: { type: Number },
+    salida: { type: Number },
+    perdida: { type: Number },
+    fisico: { type: Number },
+    diferencia: { type: Number },
+    costoInicial: { type: Number },
+    costoPromedio: { type: Number },
+    costoActual: { type: Number },
 });
 
 // Eliminamos la version y el password
