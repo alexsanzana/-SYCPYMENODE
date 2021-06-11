@@ -29,6 +29,7 @@ class Server {
             cotizaciones: '/api/cotizaciones',
             ventas: '/api/ventas',
             compras: '/api/compras',
+            agendas: '/api/agendas',
         }
         this.usuariosPath = '/api/usuarios';
         this.authPath = '/api/auth';
@@ -81,6 +82,7 @@ class Server {
         this.app.use(this.paths.cotizaciones, require('../routes/cotizaciones'));
         this.app.use(this.paths.ventas, require('../routes/ventas'));
         this.app.use(this.paths.compras, require('../routes/compras'));
+        this.app.use(this.paths.agendas, require('../routes/agendas'));
 
         // lo ultimo utilizado en producción
         this.app.get('*', (req, res) => {

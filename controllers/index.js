@@ -16,6 +16,7 @@ const imagenesProducto = require('./imagenes-productos');
 const cotizacione = require('./cotizaciones');
 const venta = require('./ventas');
 const compra = require('./compras');
+const agenda = require('./agendas');
 
 module.exports = {
     ...auth,
@@ -35,6 +36,7 @@ module.exports = {
     ...imagenesProducto,
     ...cotizacione,
     ...venta,
-    ...compra
+    ...compra,
+    ...agenda
 
 }

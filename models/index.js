@@ -17,6 +17,7 @@ const ImagenesProducto = require('./imagenesProducto');
 const Cotizacione = require('./cotizacione');
 const Venta = require('./venta');
 const Compra = require('./compra');
+const Agenda = require('./agenda');
 
 module.exports = {
     Categoria,
@@ -37,5 +38,6 @@ module.exports = {
     ImagenesProducto,
     Cotizacione,
     Venta,
-    Compra
+    Compra,
+    Agenda
 }
